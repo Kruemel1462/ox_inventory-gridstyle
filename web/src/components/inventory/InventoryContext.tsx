@@ -126,6 +126,8 @@ const InventoryContext: React.FC = () => {
         fetchNui('useButton', { id: (data?.id || 0) + 1, slot: item.slot });
         break;
     }
+
+    dispatch(closeContextMenu());
   };
 
   const handleDetachComponent = (component: string) => {
