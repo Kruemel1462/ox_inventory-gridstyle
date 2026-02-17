@@ -26,6 +26,25 @@ interface GridItemProps {
   inventoryGroups: Inventory['groups'];
 }
 
+const getRarity = (item: SlotWithItem) => {
+  if (item?.metadata?.rarity === undefined)
+    return 'linear-gradient(to bottom, rgba(255,215,0, 0), rgba(255,215,0, 0))';
+
+  let rarity = item?.metadata?.rarity;
+  if (!rarity) {
+    return 'linear-gradient(-180deg, rgba(46, 204, 113, 0.00) 0%, rgba(46, 204, 113, 0.24) 100%)';
+  } else if (rarity === 'uncommon') {
+    return 'linear-gradient(-180deg, rgba(135, 182, 48, 0) 0%, rgba(135, 182, 48, 0.30) 100%)';
+  } else if (rarity === 'rare') {
+    return 'linear-gradient(-180deg, rgba(48, 144, 182, 0.00) 0%, rgba(48, 144, 182, 0.30) 100%)';
+  } else if (rarity === 'epic') {
+    return 'linear-gradient(-180deg, rgba(155, 48, 182, 0.00) 0%, rgba(155, 48, 182, 0.3) 100%)';
+  } else if (rarity === 'legendary') {
+    return 'linear-gradient(-180deg, rgba(255, 251, 0, 0.0) 0%, rgba(255, 102, 0, 0.5) 100%)';
+  }
+  return 'linear-gradient(-180deg, rgba(46, 204, 113, 0.00) 0%, rgba(46, 204, 113, 0.24) 100%)';
+};
+
 const GridItem: React.FC<GridItemProps> = ({ item, inventoryType, inventoryId, inventoryGroups }) => {
   const dispatch = useAppDispatch();
   const timerRef = useRef<number | null>(null);
@@ -266,6 +285,7 @@ const GridItem: React.FC<GridItemProps> = ({ item, inventoryType, inventoryId, i
         gridRow: `${(item.gridY ?? 0) + 1} / span ${effectiveH}`,
         opacity: isDragging ? 0.25 : 1,
         filter: !canInteract && !isOutOfStock && !isUnsearched && !isSearching ? 'brightness(80%) grayscale(100%)' : undefined,
+        position: 'relative',
       }}
       onContextMenu={handleContext}
       onClick={handleClick}
@@ -295,24 +315,47 @@ const GridItem: React.FC<GridItemProps> = ({ item, inventoryType, inventoryId, i
         </div>
       ) : (
         <>
+          {/* Rarity background overlay */}
+          <div
+            className="grid-item-rarity"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: getRarity(item),
+              pointerEvents: 'none',
+              zIndex: 1,
+              borderRadius: 'inherit', // This will match the parent's border radius if any
+            }}
+          />
+          
           <div
             className="grid-item-image"
             style={{
               backgroundImage: `url(${imageUrl})`,
               transform: isRotated ? 'rotate(90deg) scale(0.85)' : undefined,
+              position: 'relative',
+              zIndex: 2,
+              width: '100%',
+              height: '100%',
+              backgroundSize: 'contain',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
             }}
           />
-          {hotbarIndex !== -1 && <div className="grid-item-hotbar-badge">{hotbarIndex + 1}</div>}
+          {hotbarIndex !== -1 && <div className="grid-item-hotbar-badge" style={{ zIndex: 3 }}>{hotbarIndex + 1}</div>}
 
           {isShopItem ? (
-            <div className="grid-item-header">
+            <div className="grid-item-header" style={{ zIndex: 3 }}>
               <span />
               {item.count > 0 && (
                 <span className="grid-item-stock">{item.count}x</span>
               )}
             </div>
           ) : isCraftItem ? (
-            <div className="grid-item-header">
+            <div className="grid-item-header" style={{ zIndex: 3 }}>
               <span />
               {durationSec && (
                 <span className="grid-item-craft-duration">
@@ -324,7 +367,7 @@ const GridItem: React.FC<GridItemProps> = ({ item, inventoryType, inventoryId, i
               )}
             </div>
           ) : (
-            <div className="grid-item-header">
+            <div className="grid-item-header" style={{ zIndex: 3 }}>
               <span className="grid-item-weight">
                 {item.weight > 0
                   ? item.weight >= 1000
@@ -349,13 +392,13 @@ const GridItem: React.FC<GridItemProps> = ({ item, inventoryType, inventoryId, i
           )}
 
           {isOutOfStock && (
-            <div className="grid-item-sold-out">
+            <div className="grid-item-sold-out" style={{ zIndex: 3 }}>
               <span className="grid-item-sold-badge">Out of stock</span>
             </div>
           )}
 
           {isShopItem ? (
-            <div className="grid-item-shop-footer">
+            <div className="grid-item-shop-footer" style={{ zIndex: 3 }}>
               <span className="grid-item-shop-label">{itemLabel}</span>
               {item.price !== undefined && item.price > 0 && (
                 <span className={`grid-item-shop-price${item.currency === 'black_money' ? ' grid-item-shop-price--dirty' : ''}`}>
@@ -371,7 +414,7 @@ const GridItem: React.FC<GridItemProps> = ({ item, inventoryType, inventoryId, i
               )}
             </div>
           ) : isCraftItem ? (
-            <div className="grid-item-craft-footer">
+            <div className="grid-item-craft-footer" style={{ zIndex: 3 }}>
               <span className="grid-item-craft-label">{itemLabel}</span>
               {ingredientCount > 0 && (
                 <span className="grid-item-craft-ingredients">
@@ -380,11 +423,11 @@ const GridItem: React.FC<GridItemProps> = ({ item, inventoryType, inventoryId, i
               )}
             </div>
           ) : (
-            <div className="grid-item-info">
+            <div className="grid-item-info" style={{ zIndex: 3 }}>
+            <div className="grid-item-label">{itemLabel}</div>
               {item.durability !== undefined && (
                 <WeightBar percent={item.durability} durability />
               )}
-              <div className="grid-item-label">{itemLabel}</div>
             </div>
           )}
         </>
