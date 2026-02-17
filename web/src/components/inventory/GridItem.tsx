@@ -3,7 +3,7 @@ import { useDrag } from 'react-dnd';
 import { DragSource, Inventory, InventoryType, SlotWithItem } from '../../typings';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { store } from '../../store';
-import { setDragRotated, gridMoveSlots, assignHotbar, clearHotbar, selectPlayerItemCounts, selectSearchState, beginItemSearch, finishItemSearch } from '../../store/inventory';
+import { setDragRotated, gridMoveSlots, assignHotbar, clearHotbar, selectPlayerItemCounts, selectSearchState, beginItemSearch, finishItemSearch, removePlayerItem } from '../../store/inventory';
 import { Items } from '../../store/items';
 import { getItemUrl, isSlotWithItem, canPurchaseItem, canCraftItem } from '../../helpers';
 import { getEffectiveDimensions, buildOccupancyGrid, findFirstFit, getItemSize, getSlotEffectiveSize, getWeaponEffectiveSize, isGridInventory } from '../../helpers/gridUtils';
@@ -185,7 +185,22 @@ const GridItem: React.FC<GridItemProps> = ({ item, inventoryType, inventoryId, i
 
         let targetInv;
         if (isLeft) {
-          targetInv = state.rightInventory.id ? state.rightInventory : state.backpackInventory;
+          if (state.rightInventory.id) {
+            targetInv = state.rightInventory;
+          } else if (state.backpackInventory.id) {
+            targetInv = state.backpackInventory;
+          } else {
+            const moveCount = event.shiftKey && item.count > 1 ? Math.floor(item.count / 2) : item.count;
+            dispatch(validateMove({
+              fromSlot: item.slot,
+              fromType: inventoryType,
+              toSlot: 0,
+              toType: 'newdrop',
+              count: moveCount,
+            }) as any);
+            dispatch(removePlayerItem(item.slot));
+            return;
+          }
         } else if (isBackpack) {
           targetInv = state.leftInventory;
         } else {
