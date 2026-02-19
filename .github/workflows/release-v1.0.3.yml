@@ -1,0 +1,50 @@
+name: Create release v1.0.3
+
+on:
+  push:
+    branches:
+      - 'copilot/create-github-release-v1-0-3'
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Install zip
+        run: sudo apt install zip
+
+      - name: Get latest code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: web
+
+      - name: Run build script
+        run: npm run build
+        working-directory: web
+
+      - name: Bundle files
+        run: |
+          mkdir -p ./temp/ox_inventory/web
+          cp ./{server.lua,README.md,LICENSE,fxmanifest.lua,client.lua,init.lua} ./temp/ox_inventory
+          cp -r ./{setup,modules,data,locales} ./temp/ox_inventory
+          cp -r ./web/build ./temp/ox_inventory/web/build
+          cp ./web/LICENSE ./temp/ox_inventory/web/build
+          cp -r ./web/images ./temp/ox_inventory/web/images
+          cd ./temp && zip -r ../ox_inventory.zip ./ox_inventory
+
+      - name: Create release
+        uses: 'marvinpinto/action-automatic-releases@v1.2.1'
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: v1.0.3
+          prerelease: false
+          title: 'v1.0.3'
+          files: ox_inventory.zip
