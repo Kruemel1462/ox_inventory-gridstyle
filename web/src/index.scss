@@ -40,6 +40,7 @@ $rarity-uncommon: #a3e635;
 $rarity-rare: #38bdf8;
 $rarity-epic: #c084fc;
 $rarity-legendary: #fbbf24;
+$rarity-mythic: #f80000;
 $type-trunk: #7a8590;
 $type-drop: #e08040;
 $type-glovebox: #8a959e;
@@ -228,6 +229,7 @@ input[type='number']::-webkit-outer-spin-button {
 .ctx-menu-wrapper--rare { .ctx-preview-img-wrap { border-color: rgba($rarity-rare, 0.25); } }
 .ctx-menu-wrapper--epic { .ctx-preview-img-wrap { border-color: rgba($rarity-epic, 0.25); } }
 .ctx-menu-wrapper--legendary { .ctx-preview-img-wrap { border-color: rgba($rarity-legendary, 0.3); } }
+.ctx-menu-wrapper--mythic { .ctx-preview-img-wrap { border-color: rgba($rarity-mythic, 0.3); } }
 
 .ctx-rarity-bar {
   height: 2px;
@@ -240,6 +242,7 @@ input[type='number']::-webkit-outer-spin-button {
 .ctx-rarity-bar--rare { background: linear-gradient(90deg, rgba($rarity-rare, 0.7), rgba($rarity-rare, 0.15)); }
 .ctx-rarity-bar--epic { background: linear-gradient(90deg, rgba($rarity-epic, 0.7), rgba($rarity-epic, 0.15)); }
 .ctx-rarity-bar--legendary { background: linear-gradient(90deg, rgba($rarity-legendary, 0.8), rgba($rarity-legendary, 0.2)); }
+.ctx-rarity-bar--mythic { background: linear-gradient(90deg, rgba($rarity-mythic, 0.9), rgba($rarity-mythic, 0.3)); }
 
 @mixin ctx-rarity-badge($color) {
   color: $color;
@@ -267,6 +270,7 @@ input[type='number']::-webkit-outer-spin-button {
   &--rare { @include ctx-rarity-badge($rarity-rare); }
   &--epic { @include ctx-rarity-badge($rarity-epic); }
   &--legendary { @include ctx-rarity-badge($rarity-legendary); }
+  &--mythic { @include ctx-rarity-badge($rarity-mythic); }
 }
 
 .ctx-weight-badge {
@@ -310,6 +314,7 @@ input[type='number']::-webkit-outer-spin-button {
 .ctx-img--rare { border-color: rgba($rarity-rare, 0.25); }
 .ctx-img--epic { border-color: rgba($rarity-epic, 0.25); }
 .ctx-img--legendary { border-color: rgba($rarity-legendary, 0.3); }
+.ctx-img--mythic { border-color: rgba($rarity-mythic, 0.3); }
 
 .ctx-preview-img {
   width: 34px;
@@ -755,6 +760,7 @@ input[type='number']::-webkit-outer-spin-button {
 .tooltip-rarity-bar--rare { background: linear-gradient(90deg, rgba($rarity-rare, 0.7), rgba($rarity-rare, 0.15)); }
 .tooltip-rarity-bar--epic { background: linear-gradient(90deg, rgba($rarity-epic, 0.7), rgba($rarity-epic, 0.15)); }
 .tooltip-rarity-bar--legendary { background: linear-gradient(90deg, rgba($rarity-legendary, 0.8), rgba($rarity-legendary, 0.2)); }
+.tooltip-rarity-bar--mythic { background: linear-gradient(90deg, rgba($rarity-mythic, 0.9), rgba($rarity-mythic, 0.3)); }
 
 @mixin tooltip-rarity-bg($color) {
   border-color: rgba($color, 0.1);
@@ -766,7 +772,7 @@ input[type='number']::-webkit-outer-spin-button {
 .tooltip-wrapper--rare { @include tooltip-rarity-bg($rarity-rare); }
 .tooltip-wrapper--epic { @include tooltip-rarity-bg($rarity-epic); }
 .tooltip-wrapper--legendary { @include tooltip-rarity-bg($rarity-legendary); }
-
+.tooltip-wrapper--mythic { @include tooltip-rarity-bg($rarity-mythic); }
 .tooltip-header-wrapper {
   display: flex;
   flex-direction: row;
@@ -803,6 +809,7 @@ input[type='number']::-webkit-outer-spin-button {
 .tooltip-img--rare { border-color: rgba($rarity-rare, 0.25); }
 .tooltip-img--epic { border-color: rgba($rarity-epic, 0.25); }
 .tooltip-img--legendary { border-color: rgba($rarity-legendary, 0.3); }
+.tooltip-img--mythic { border-color: rgba($rarity-mythic, 0.3); }
 
 .tooltip-item-image {
   width: 32px;
@@ -872,6 +879,7 @@ input[type='number']::-webkit-outer-spin-button {
   &--rare { @include rarity-badge($rarity-rare); }
   &--epic { @include rarity-badge($rarity-epic); }
   &--legendary { @include rarity-badge($rarity-legendary); }
+  &--mythic { @include rarity-badge($rarity-mythic); }
 }
 
 .tooltip-weight-badge {
@@ -2776,6 +2784,7 @@ $inv-types: (
 .grid-item--rarity-rare { @include rarity-tier($rarity-rare); }
 .grid-item--rarity-epic { @include rarity-tier($rarity-epic); }
 .grid-item--rarity-legendary { @include rarity-tier($rarity-legendary); }
+.grid-item--rarity-mythic { @include rarity-tier($rarity-mythic); }
 
 .grid-item-image {
   position: absolute;

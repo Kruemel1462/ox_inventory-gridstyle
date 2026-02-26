@@ -44,7 +44,7 @@ export const Items: {
     width: 5,
     height: 2,
     weapon: true,
-    rarity: 'epic',
+    rarity: 'mythic',
   },
   medkit: {
     name: 'medkit',

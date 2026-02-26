@@ -111,7 +111,7 @@ const CraftingInventory: React.FC<Props> = ({ inventory, onHeaderMouseDown, isLo
             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
             </svg>
-            <span>QUEUE</span>
+            <span>Warteschlange</span>
             <span className="craft-queue-header-count">{craftQueue.length}</span>
           </div>
         )}
@@ -121,7 +121,7 @@ const CraftingInventory: React.FC<Props> = ({ inventory, onHeaderMouseDown, isLo
               <path d="M12 5v14" />
               <path d="m19 12-7 7-7-7" />
             </svg>
-            <span>Drag recipe here to craft</span>
+            <span>Ziehe das Rezept hierher, um es herzustellen</span>
           </div>
         ) : (
           <div className="craft-queue-grid">

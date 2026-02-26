@@ -665,17 +665,17 @@ const GridInventory: React.FC<GridInventoryProps> = ({ inventory, onHeaderMouseD
         <div className="grid-header-right">
           {isShop && (
             <div className="grid-header-badge grid-header-badge--shop">
-              {itemCount} {itemCount === 1 ? 'item' : 'items'}
+              {itemCount} {itemCount === 1 ? 'Artikel' : 'Artikel'}
             </div>
           )}
           {isCrafting && (
             <div className="grid-header-badge grid-header-badge--crafting">
-              {itemCount} {itemCount === 1 ? 'recipe' : 'recipes'}
+              {itemCount} {itemCount === 1 ? 'Rezept' : 'Rezepte'}
             </div>
           )}
           {(isShop || isCrafting) && (
             <div className={`grid-amount-selector ${isShop ? 'grid-amount-selector--shop' : 'grid-amount-selector--craft'}`}>
-              <span className="grid-amount-label">QTY</span>
+              <span className="grid-amount-label">Menge</span>
               <button className="grid-amount-btn" onClick={handleAmountDecrease}>
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14"/></svg>
               </button>
@@ -711,14 +711,14 @@ const GridInventory: React.FC<GridInventoryProps> = ({ inventory, onHeaderMouseD
           )}
           {(canSort || onToggleLock || onClose) && <div className="grid-header-btn-separator" />}
           {canSort && !isReadOnly && (
-            <button className="panel-sort-btn" onClick={handleSort} title="Auto-sort">
+            <button className="panel-sort-btn" onClick={handleSort} title="Sortieren">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M3 6h18"/><path d="M3 12h14"/><path d="M3 18h10"/>
               </svg>
             </button>
           )}
           {onToggleLock && (
-            <button className={`panel-lock-btn${isLocked ? ' panel-lock-btn--locked' : ''}`} onClick={onToggleLock} title={isLocked ? 'Unlock panel' : 'Lock panel'}>
+            <button className={`panel-lock-btn${isLocked ? ' panel-lock-btn--locked' : ''}`} onClick={onToggleLock} title={isLocked ? 'Panel entsperren' : 'Panel sperren'}>
               {isLocked ? (
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
@@ -731,7 +731,7 @@ const GridInventory: React.FC<GridInventoryProps> = ({ inventory, onHeaderMouseD
             </button>
           )}
           {onClose && (
-            <button className="panel-close-btn" onClick={onClose} title="Close">
+            <button className="panel-close-btn" onClick={onClose} title="Schließen">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 6L6 18"/><path d="M6 6l12 12"/>
               </svg>

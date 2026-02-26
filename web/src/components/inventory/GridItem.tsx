@@ -30,6 +30,7 @@ const GridItem: React.FC<GridItemProps> = ({ item, inventoryType, inventoryId, i
   const dispatch = useAppDispatch();
   const timerRef = useRef<number | null>(null);
   const isHovered = useRef(false);
+  const ctrlKeyPressed = useRef(false);
   const isSearching = useAppSelector((state) => state.inventory.searchState.searchingSlots.includes(item.slot));
   const isUnsearched = item.searched === false && !isSearching;
   const [wasRevealed, setWasRevealed] = React.useState(false);
@@ -107,6 +108,26 @@ const GridItem: React.FC<GridItemProps> = ({ item, inventoryType, inventoryId, i
     return () => window.removeEventListener('keydown', handler);
   }, [item.slot, inventoryType, dispatch]);
 
+  // Track STRG-Taste Status um Drag zu deaktivieren
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Control') {
+        ctrlKeyPressed.current = true;
+      }
+    };
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.key === 'Control') {
+        ctrlKeyPressed.current = false;
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
+
   const weaponSize = getWeaponEffectiveSize(item.name, item.metadata);
   const baseWidth = weaponSize.width;
   const baseHeight = weaponSize.height;
@@ -133,11 +154,18 @@ const GridItem: React.FC<GridItemProps> = ({ item, inventoryType, inventoryId, i
           splitCount: activeSplit,
         };
       },
-      canDrag: () =>
-        !isUnsearched &&
-        !isSearching &&
-        canPurchaseItem(item, { type: inventoryType, groups: inventoryGroups }) &&
-        canCraftItem(item, inventoryType),
+      canDrag: () => {
+        // Deaktiviere Drag wenn STRG gedrückt wird (für STRG+Klick Verschiebung)
+        if (ctrlKeyPressed.current) {
+          return false;
+        }
+        return (
+          !isUnsearched &&
+          !isSearching &&
+          canPurchaseItem(item, { type: inventoryType, groups: inventoryGroups }) &&
+          canCraftItem(item, inventoryType)
+        );
+      },
     }),
     [item, inventoryType, inventoryId, inventoryGroups, baseWidth, baseHeight, activeSplit]
   );
@@ -379,7 +407,7 @@ const GridItem: React.FC<GridItemProps> = ({ item, inventoryType, inventoryId, i
 
           {isOutOfStock && (
             <div className="grid-item-sold-out">
-              <span className="grid-item-sold-badge">Out of stock</span>
+              <span className="grid-item-sold-badge">Ausverkauft</span>
             </div>
           )}
 

@@ -152,10 +152,10 @@ const SlotTooltip: React.ForwardRefRenderFunction<
                 <path d="M20 12V8H6a2 2 0 01-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/>
                 <circle cx="18" cy="16" r="2"/>
               </svg>
-              Stock
+              Lagerbestand
             </span>
             <span className={`tooltip-shop-value${stockCount === 0 ? ' tooltip-shop-value--sold' : ''}`}>
-              {stockCount === 0 ? 'SOLD OUT' : stockCount !== undefined ? `${stockCount} in stock` : 'In stock'}
+              {stockCount === 0 ? 'AUSVERKAUFT' : stockCount !== undefined ? `${stockCount} auf Lager` : 'Auf Lager'}
             </span>
           </div>
           <div className="tooltip-shop-row">
@@ -164,7 +164,7 @@ const SlotTooltip: React.ForwardRefRenderFunction<
                 <path d="M12 3a4 4 0 00-4 4c0 2 2 4 4 8 2-4 4-6 4-8a4 4 0 00-4-4z"/>
                 <path d="M5 21h14"/>
               </svg>
-              Weight
+              Gewicht
             </span>
             <span className="tooltip-shop-value">{weightDisplay}</span>
           </div>
@@ -183,7 +183,7 @@ const SlotTooltip: React.ForwardRefRenderFunction<
             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18"/>
             </svg>
-            <span>Drag to inventory to purchase</span>
+            <span>In Inventar ziehen zum kaufen</span>
           </div>
         </div>
       )}
