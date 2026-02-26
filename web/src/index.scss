@@ -1,13 +1,13 @@
 @use 'sass:color';
 
-$mainColor: #141414;
-$textColor: #999999;
+$mainColor: #0d1220;
+$textColor: #8faac0;
 $mainFont: 'Inter', 'Segoe UI', Roboto, sans-serif;
 
-$secondaryColor: rgba(10, 10, 10, 0.4);
-$secondaryColorHighlight: rgba(255, 255, 255, 0.06);
-$secondaryColorLight: rgba(0, 0, 0, 0.5);
-$secondaryColorDark: rgba(10, 10, 10, 0.8);
+$secondaryColor: rgba(6, 10, 20, 0.4);
+$secondaryColorHighlight: rgba(91, 158, 245, 0.06);
+$secondaryColorLight: rgba(6, 10, 20, 0.5);
+$secondaryColorDark: rgba(6, 10, 20, 0.85);
 
 $gridCols: 5;
 $gridRows: 5;
@@ -15,17 +15,17 @@ $gridSize: 10.2vh;
 $gridGap: 2px;
 $containerSize: calc(#{$gridRows} * #{$gridSize + 0.22vh} + #{$gridRows} * #{$gridGap});
 
-$bg-deep: #0a0a0a;
-$bg-panel: #141414;
-$bg-card: #1c1c1c;
-$bg-card-hover: #282828;
-$border-subtle: rgba(255, 255, 255, 0.06);
-$border-hover: rgba(255, 255, 255, 0.15);
-$text-primary: #ebebeb;
-$text-secondary: #999999;
-$text-muted: #5c5c5c;
-$accent: #d4d4d4;
-$accent-glow: rgba(212, 212, 212, 0.08);
+$bg-deep: #060a12;
+$bg-panel: #0d1220;
+$bg-card: #131928;
+$bg-card-hover: #1a2235;
+$border-subtle: rgba(91, 158, 245, 0.08);
+$border-hover: rgba(91, 158, 245, 0.22);
+$text-primary: #e8edf5;
+$text-secondary: #8faac0;
+$text-muted: #3d5070;
+$accent: #5b9ef5;
+$accent-glow: rgba(91, 158, 245, 0.1);
 $success: #4ade80;
 $danger: #f87171;
 $warning: #fbbf24;
@@ -112,15 +112,25 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 @keyframes ghostPulse {
-  0%, 100% { opacity: 0.55; }
-  50% { opacity: 0.9; }
+
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 0.9;
+  }
 }
 
 @keyframes weaponCompatPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     border-color: rgba(56, 189, 248, 0.25);
     box-shadow: 0 0 8px rgba(56, 189, 248, 0.06), inset 0 0 6px rgba(56, 189, 248, 0.02);
   }
+
   50% {
     border-color: rgba(56, 189, 248, 0.5);
     box-shadow: 0 0 16px rgba(56, 189, 248, 0.18), inset 0 0 10px rgba(56, 189, 248, 0.06);
@@ -198,10 +208,10 @@ input[type='number']::-webkit-outer-spin-button {
 .context-menu-list {
   min-width: 240px;
   max-width: 290px;
-  background: linear-gradient(170deg, rgba(24, 24, 27, 0.97) 0%, rgba(9, 9, 11, 0.98) 100%);
+  background: linear-gradient(170deg, rgba(14, 20, 36, 0.97) 0%, rgba(6, 10, 18, 0.98) 100%);
   color: $text-primary;
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(91, 158, 245, 0.1);
   border-radius: 10px;
   outline: none;
   display: flex;
@@ -209,7 +219,8 @@ input[type='number']::-webkit-outer-spin-button {
   overflow: hidden;
   box-shadow:
     0 16px 48px rgba(0, 0, 0, 0.5),
-    0 6px 16px rgba(0, 0, 0, 0.3);
+    0 6px 16px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(91, 158, 245, 0.04);
   z-index: 9999;
 }
 
@@ -219,17 +230,44 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 @mixin ctx-rarity-bg($color) {
-  .context-menu-list & {
-    
+  .context-menu-list & {}
+}
+
+.ctx-menu-wrapper--common {
+  .ctx-preview-img-wrap {
+    border-color: rgba($rarity-common, 0.2);
   }
 }
 
-.ctx-menu-wrapper--common { .ctx-preview-img-wrap { border-color: rgba($rarity-common, 0.2); } }
-.ctx-menu-wrapper--uncommon { .ctx-preview-img-wrap { border-color: rgba($rarity-uncommon, 0.2); } }
-.ctx-menu-wrapper--rare { .ctx-preview-img-wrap { border-color: rgba($rarity-rare, 0.25); } }
-.ctx-menu-wrapper--epic { .ctx-preview-img-wrap { border-color: rgba($rarity-epic, 0.25); } }
-.ctx-menu-wrapper--legendary { .ctx-preview-img-wrap { border-color: rgba($rarity-legendary, 0.3); } }
-.ctx-menu-wrapper--mythic { .ctx-preview-img-wrap { border-color: rgba($rarity-mythic, 0.3); } }
+.ctx-menu-wrapper--uncommon {
+  .ctx-preview-img-wrap {
+    border-color: rgba($rarity-uncommon, 0.2);
+  }
+}
+
+.ctx-menu-wrapper--rare {
+  .ctx-preview-img-wrap {
+    border-color: rgba($rarity-rare, 0.25);
+  }
+}
+
+.ctx-menu-wrapper--epic {
+  .ctx-preview-img-wrap {
+    border-color: rgba($rarity-epic, 0.25);
+  }
+}
+
+.ctx-menu-wrapper--legendary {
+  .ctx-preview-img-wrap {
+    border-color: rgba($rarity-legendary, 0.3);
+  }
+}
+
+.ctx-menu-wrapper--mythic {
+  .ctx-preview-img-wrap {
+    border-color: rgba($rarity-mythic, 0.3);
+  }
+}
 
 .ctx-rarity-bar {
   height: 2px;
@@ -237,18 +275,38 @@ input[type='number']::-webkit-outer-spin-button {
   flex-shrink: 0;
 }
 
-.ctx-rarity-bar--common { background: linear-gradient(90deg, rgba($rarity-common, 0.6), rgba($rarity-common, 0.15)); }
-.ctx-rarity-bar--uncommon { background: linear-gradient(90deg, rgba($rarity-uncommon, 0.6), rgba($rarity-uncommon, 0.15)); }
-.ctx-rarity-bar--rare { background: linear-gradient(90deg, rgba($rarity-rare, 0.7), rgba($rarity-rare, 0.15)); }
-.ctx-rarity-bar--epic { background: linear-gradient(90deg, rgba($rarity-epic, 0.7), rgba($rarity-epic, 0.15)); }
-.ctx-rarity-bar--legendary { background: linear-gradient(90deg, rgba($rarity-legendary, 0.8), rgba($rarity-legendary, 0.2)); }
-.ctx-rarity-bar--mythic { background: linear-gradient(90deg, rgba($rarity-mythic, 0.9), rgba($rarity-mythic, 0.3)); }
+.ctx-rarity-bar--common {
+  background: linear-gradient(90deg, rgba($rarity-common, 0.6), rgba($rarity-common, 0.15));
+}
+
+.ctx-rarity-bar--uncommon {
+  background: linear-gradient(90deg, rgba($rarity-uncommon, 0.6), rgba($rarity-uncommon, 0.15));
+}
+
+.ctx-rarity-bar--rare {
+  background: linear-gradient(90deg, rgba($rarity-rare, 0.7), rgba($rarity-rare, 0.15));
+}
+
+.ctx-rarity-bar--epic {
+  background: linear-gradient(90deg, rgba($rarity-epic, 0.7), rgba($rarity-epic, 0.15));
+}
+
+.ctx-rarity-bar--legendary {
+  background: linear-gradient(90deg, rgba($rarity-legendary, 0.8), rgba($rarity-legendary, 0.2));
+}
+
+.ctx-rarity-bar--mythic {
+  background: linear-gradient(90deg, rgba($rarity-mythic, 0.9), rgba($rarity-mythic, 0.3));
+}
 
 @mixin ctx-rarity-badge($color) {
   color: $color;
   background: rgba($color, 0.1);
   border: 1px solid rgba($color, 0.15);
-  svg { color: $color; }
+
+  svg {
+    color: $color;
+  }
 }
 
 .ctx-rarity-badge {
@@ -263,14 +321,34 @@ input[type='number']::-webkit-outer-spin-button {
   padding: 2px 6px;
   border-radius: 3px;
   white-space: nowrap;
-  svg { flex-shrink: 0; }
 
-  &--common { @include ctx-rarity-badge($rarity-common); }
-  &--uncommon { @include ctx-rarity-badge($rarity-uncommon); }
-  &--rare { @include ctx-rarity-badge($rarity-rare); }
-  &--epic { @include ctx-rarity-badge($rarity-epic); }
-  &--legendary { @include ctx-rarity-badge($rarity-legendary); }
-  &--mythic { @include ctx-rarity-badge($rarity-mythic); }
+  svg {
+    flex-shrink: 0;
+  }
+
+  &--common {
+    @include ctx-rarity-badge($rarity-common);
+  }
+
+  &--uncommon {
+    @include ctx-rarity-badge($rarity-uncommon);
+  }
+
+  &--rare {
+    @include ctx-rarity-badge($rarity-rare);
+  }
+
+  &--epic {
+    @include ctx-rarity-badge($rarity-epic);
+  }
+
+  &--legendary {
+    @include ctx-rarity-badge($rarity-legendary);
+  }
+
+  &--mythic {
+    @include ctx-rarity-badge($rarity-mythic);
+  }
 }
 
 .ctx-weight-badge {
@@ -285,7 +363,11 @@ input[type='number']::-webkit-outer-spin-button {
   padding: 2px 6px;
   border-radius: 3px;
   white-space: nowrap;
-  svg { color: $text-muted; flex-shrink: 0; }
+
+  svg {
+    color: $text-muted;
+    flex-shrink: 0;
+  }
 }
 
 .ctx-preview {
@@ -309,12 +391,29 @@ input[type='number']::-webkit-outer-spin-button {
   transition: border-color 0.15s ease;
 }
 
-.ctx-img--common { border-color: rgba($rarity-common, 0.2); }
-.ctx-img--uncommon { border-color: rgba($rarity-uncommon, 0.2); }
-.ctx-img--rare { border-color: rgba($rarity-rare, 0.25); }
-.ctx-img--epic { border-color: rgba($rarity-epic, 0.25); }
-.ctx-img--legendary { border-color: rgba($rarity-legendary, 0.3); }
-.ctx-img--mythic { border-color: rgba($rarity-mythic, 0.3); }
+.ctx-img--common {
+  border-color: rgba($rarity-common, 0.2);
+}
+
+.ctx-img--uncommon {
+  border-color: rgba($rarity-uncommon, 0.2);
+}
+
+.ctx-img--rare {
+  border-color: rgba($rarity-rare, 0.25);
+}
+
+.ctx-img--epic {
+  border-color: rgba($rarity-epic, 0.25);
+}
+
+.ctx-img--legendary {
+  border-color: rgba($rarity-legendary, 0.3);
+}
+
+.ctx-img--mythic {
+  border-color: rgba($rarity-mythic, 0.3);
+}
 
 .ctx-preview-img {
   width: 34px;
@@ -380,7 +479,9 @@ input[type='number']::-webkit-outer-spin-button {
   color: $text-muted;
   flex-shrink: 0;
 
-  svg { opacity: 0.5; }
+  svg {
+    opacity: 0.5;
+  }
 }
 
 .ctx-durability-right {
@@ -516,9 +617,9 @@ input[type='number']::-webkit-outer-spin-button {
   align-items: center;
   justify-content: center;
   padding: 7px 0;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(91, 158, 245, 0.08);
   border-radius: 5px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(91, 158, 245, 0.03);
   color: $text-secondary;
   font-size: 11px;
   font-weight: 600;
@@ -529,13 +630,13 @@ input[type='number']::-webkit-outer-spin-button {
   outline: none;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.07);
-    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(91, 158, 245, 0.1);
+    border-color: rgba(91, 158, 245, 0.2);
     color: $text-primary;
   }
 
   &:active {
-    background: rgba(255, 255, 255, 0.09);
+    background: rgba(91, 158, 245, 0.14);
     transform: scale(0.98);
   }
 
@@ -631,8 +732,13 @@ input[type='number']::-webkit-outer-spin-button {
     background: rgba($danger, 0.06);
     border-color: rgba($danger, 0.2);
 
-    .ctx-attachment-chip-label { color: $text-primary; }
-    .ctx-attachment-chip-x { opacity: 1; }
+    .ctx-attachment-chip-label {
+      color: $text-primary;
+    }
+
+    .ctx-attachment-chip-x {
+      opacity: 1;
+    }
   }
 
   &:active {
@@ -705,26 +811,38 @@ input[type='number']::-webkit-outer-spin-button {
     transition: opacity 0.1s ease;
   }
 
-  &:active { transform: none; }
+  &:active {
+    transform: none;
+  }
 
   &:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(91, 158, 245, 0.06);
     color: $text-primary;
-    .context-menu-item-icon { opacity: 0.7; }
+
+    .context-menu-item-icon {
+      opacity: 0.7;
+    }
   }
 
   &[data-focus-inside],
   &:focus {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(91, 158, 245, 0.06);
     color: $text-primary;
-    .context-menu-item-icon { opacity: 0.7; }
+
+    .context-menu-item-icon {
+      opacity: 0.7;
+    }
   }
 
   &--danger {
     &:hover {
       background: rgba($danger, 0.04);
       color: $danger;
-      .context-menu-item-icon { opacity: 0.7; color: $danger; }
+
+      .context-menu-item-icon {
+        opacity: 0.7;
+        color: $danger;
+      }
     }
   }
 }
@@ -739,12 +857,13 @@ input[type='number']::-webkit-outer-spin-button {
   font-family: $mainFont;
   padding: 0;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(91, 158, 245, 0.1);
   overflow: hidden;
   box-shadow:
     0 16px 48px rgba(0, 0, 0, 0.5),
-    0 6px 16px rgba(0, 0, 0, 0.3);
-  background: linear-gradient(170deg, rgba(24, 24, 27, 0.97) 0%, rgba(9, 9, 11, 0.98) 100%);
+    0 6px 16px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(91, 158, 245, 0.04);
+  background: linear-gradient(170deg, rgba(14, 20, 36, 0.97) 0%, rgba(6, 10, 18, 0.98) 100%);
   z-index: 9999;
   position: relative;
 }
@@ -755,24 +874,59 @@ input[type='number']::-webkit-outer-spin-button {
   flex-shrink: 0;
 }
 
-.tooltip-rarity-bar--common { background: linear-gradient(90deg, rgba($rarity-common, 0.6), rgba($rarity-common, 0.15)); }
-.tooltip-rarity-bar--uncommon { background: linear-gradient(90deg, rgba($rarity-uncommon, 0.6), rgba($rarity-uncommon, 0.15)); }
-.tooltip-rarity-bar--rare { background: linear-gradient(90deg, rgba($rarity-rare, 0.7), rgba($rarity-rare, 0.15)); }
-.tooltip-rarity-bar--epic { background: linear-gradient(90deg, rgba($rarity-epic, 0.7), rgba($rarity-epic, 0.15)); }
-.tooltip-rarity-bar--legendary { background: linear-gradient(90deg, rgba($rarity-legendary, 0.8), rgba($rarity-legendary, 0.2)); }
-.tooltip-rarity-bar--mythic { background: linear-gradient(90deg, rgba($rarity-mythic, 0.9), rgba($rarity-mythic, 0.3)); }
+.tooltip-rarity-bar--common {
+  background: linear-gradient(90deg, rgba($rarity-common, 0.6), rgba($rarity-common, 0.15));
+}
+
+.tooltip-rarity-bar--uncommon {
+  background: linear-gradient(90deg, rgba($rarity-uncommon, 0.6), rgba($rarity-uncommon, 0.15));
+}
+
+.tooltip-rarity-bar--rare {
+  background: linear-gradient(90deg, rgba($rarity-rare, 0.7), rgba($rarity-rare, 0.15));
+}
+
+.tooltip-rarity-bar--epic {
+  background: linear-gradient(90deg, rgba($rarity-epic, 0.7), rgba($rarity-epic, 0.15));
+}
+
+.tooltip-rarity-bar--legendary {
+  background: linear-gradient(90deg, rgba($rarity-legendary, 0.8), rgba($rarity-legendary, 0.2));
+}
+
+.tooltip-rarity-bar--mythic {
+  background: linear-gradient(90deg, rgba($rarity-mythic, 0.9), rgba($rarity-mythic, 0.3));
+}
 
 @mixin tooltip-rarity-bg($color) {
   border-color: rgba($color, 0.1);
   background: linear-gradient(170deg, rgba(color.mix($color, $bg-panel, 8%), 0.97) 0%, rgba($bg-deep, 0.98) 100%);
 }
 
-.tooltip-wrapper--common { @include tooltip-rarity-bg($rarity-common); }
-.tooltip-wrapper--uncommon { @include tooltip-rarity-bg($rarity-uncommon); }
-.tooltip-wrapper--rare { @include tooltip-rarity-bg($rarity-rare); }
-.tooltip-wrapper--epic { @include tooltip-rarity-bg($rarity-epic); }
-.tooltip-wrapper--legendary { @include tooltip-rarity-bg($rarity-legendary); }
-.tooltip-wrapper--mythic { @include tooltip-rarity-bg($rarity-mythic); }
+.tooltip-wrapper--common {
+  @include tooltip-rarity-bg($rarity-common);
+}
+
+.tooltip-wrapper--uncommon {
+  @include tooltip-rarity-bg($rarity-uncommon);
+}
+
+.tooltip-wrapper--rare {
+  @include tooltip-rarity-bg($rarity-rare);
+}
+
+.tooltip-wrapper--epic {
+  @include tooltip-rarity-bg($rarity-epic);
+}
+
+.tooltip-wrapper--legendary {
+  @include tooltip-rarity-bg($rarity-legendary);
+}
+
+.tooltip-wrapper--mythic {
+  @include tooltip-rarity-bg($rarity-mythic);
+}
+
 .tooltip-header-wrapper {
   display: flex;
   flex-direction: row;
@@ -804,12 +958,29 @@ input[type='number']::-webkit-outer-spin-button {
   transition: border-color 0.15s ease;
 }
 
-.tooltip-img--common { border-color: rgba($rarity-common, 0.2); }
-.tooltip-img--uncommon { border-color: rgba($rarity-uncommon, 0.2); }
-.tooltip-img--rare { border-color: rgba($rarity-rare, 0.25); }
-.tooltip-img--epic { border-color: rgba($rarity-epic, 0.25); }
-.tooltip-img--legendary { border-color: rgba($rarity-legendary, 0.3); }
-.tooltip-img--mythic { border-color: rgba($rarity-mythic, 0.3); }
+.tooltip-img--common {
+  border-color: rgba($rarity-common, 0.2);
+}
+
+.tooltip-img--uncommon {
+  border-color: rgba($rarity-uncommon, 0.2);
+}
+
+.tooltip-img--rare {
+  border-color: rgba($rarity-rare, 0.25);
+}
+
+.tooltip-img--epic {
+  border-color: rgba($rarity-epic, 0.25);
+}
+
+.tooltip-img--legendary {
+  border-color: rgba($rarity-legendary, 0.3);
+}
+
+.tooltip-img--mythic {
+  border-color: rgba($rarity-mythic, 0.3);
+}
 
 .tooltip-item-image {
   width: 32px;
@@ -856,7 +1027,9 @@ input[type='number']::-webkit-outer-spin-button {
   background: rgba($color, 0.1);
   border: 1px solid rgba($color, 0.15);
 
-  svg { color: $color; }
+  svg {
+    color: $color;
+  }
 }
 
 .tooltip-rarity-badge {
@@ -872,14 +1045,33 @@ input[type='number']::-webkit-outer-spin-button {
   border-radius: 4px;
   white-space: nowrap;
 
-  svg { flex-shrink: 0; }
+  svg {
+    flex-shrink: 0;
+  }
 
-  &--common { @include rarity-badge($rarity-common); }
-  &--uncommon { @include rarity-badge($rarity-uncommon); }
-  &--rare { @include rarity-badge($rarity-rare); }
-  &--epic { @include rarity-badge($rarity-epic); }
-  &--legendary { @include rarity-badge($rarity-legendary); }
-  &--mythic { @include rarity-badge($rarity-mythic); }
+  &--common {
+    @include rarity-badge($rarity-common);
+  }
+
+  &--uncommon {
+    @include rarity-badge($rarity-uncommon);
+  }
+
+  &--rare {
+    @include rarity-badge($rarity-rare);
+  }
+
+  &--epic {
+    @include rarity-badge($rarity-epic);
+  }
+
+  &--legendary {
+    @include rarity-badge($rarity-legendary);
+  }
+
+  &--mythic {
+    @include rarity-badge($rarity-mythic);
+  }
 }
 
 .tooltip-weight-badge {
@@ -905,7 +1097,7 @@ input[type='number']::-webkit-outer-spin-button {
   padding: 10px 14px 6px;
 }
 
-.tooltip-markdown > p {
+.tooltip-markdown>p {
   margin: 0;
   font-size: 11px;
   color: $text-muted;
@@ -1409,8 +1601,13 @@ button:active {
 }
 
 @keyframes overlayFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .useful-controls-dialog {
@@ -1485,7 +1682,7 @@ button:active {
 .uc-section {
   padding: 8px 14px;
 
-  & + & {
+  &+& {
     border-top: 1px solid rgba(255, 255, 255, 0.03);
   }
 
@@ -1552,7 +1749,7 @@ button:active {
   justify-content: space-between;
   padding: 4px 0;
 
-  & + & {
+  &+& {
     margin-top: 2px;
   }
 }
@@ -1767,7 +1964,7 @@ button:active {
     right: 0;
     bottom: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+    background: linear-gradient(90deg, transparent, rgba(91, 158, 245, 0.18), transparent);
     pointer-events: none;
   }
 
@@ -1980,8 +2177,8 @@ button:active {
   align-items: center;
   background: rgba($bg-panel, 0.94);
   border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(91, 158, 245, 0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 20px rgba(91, 158, 245, 0.05);
   padding: 5px;
   overflow: hidden;
 }
@@ -1992,7 +2189,7 @@ button:active {
   left: 15%;
   right: 15%;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.08) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(91, 158, 245, 0.25) 50%, transparent 100%);
   pointer-events: none;
 }
 
@@ -2227,7 +2424,7 @@ button:active {
   opacity: 1;
   transform: scale(1);
   transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .transition-fade-exit {
@@ -2239,7 +2436,7 @@ button:active {
   opacity: 0;
   transform: scale(0.97);
   transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .transition-slide-up-enter {
@@ -2251,7 +2448,7 @@ button:active {
   transform: translateY(0px);
   opacity: 1;
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .transition-slide-up-exit {
@@ -2263,7 +2460,7 @@ button:active {
   transform: translateY(40px);
   opacity: 0;
   transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .inventory-grid-wrapper {
@@ -2301,7 +2498,7 @@ button:active {
     right: 0;
     bottom: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+    background: linear-gradient(90deg, transparent, rgba(91, 158, 245, 0.18), transparent);
     pointer-events: none;
   }
 
@@ -2361,14 +2558,12 @@ $inv-types: (
       border-bottom-color: rgba($color, 0.15);
 
       &::after {
-        background: linear-gradient(
-          90deg,
-          transparent 0%,
-          rgba($color, 0.25) 30%,
-          rgba($color, 0.4) 50%,
-          rgba($color, 0.25) 70%,
-          transparent 100%
-        );
+        background: linear-gradient(90deg,
+            transparent 0%,
+            rgba($color, 0.25) 30%,
+            rgba($color, 0.4) 50%,
+            rgba($color, 0.25) 70%,
+            transparent 100%);
       }
     }
 
@@ -2401,14 +2596,12 @@ $inv-types: (
       border-bottom-color: rgba($color, 0.15);
 
       &::after {
-        background: linear-gradient(
-          90deg,
-          transparent 0%,
-          rgba($color, 0.25) 30%,
-          rgba($color, 0.4) 50%,
-          rgba($color, 0.25) 70%,
-          transparent 100%
-        );
+        background: linear-gradient(90deg,
+            transparent 0%,
+            rgba($color, 0.25) 30%,
+            rgba($color, 0.4) 50%,
+            rgba($color, 0.25) 70%,
+            transparent 100%);
       }
     }
 
@@ -2550,13 +2743,20 @@ $inv-types: (
   background: $success;
   box-shadow: 0 0 4px rgba($success, 0.2);
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-              background 0.3s ease,
-              box-shadow 0.3s ease;
+    background 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 @keyframes weightBarPulse {
-  0%, 100% { box-shadow: 0 0 4px rgba($danger, 0.3); }
-  50%      { box-shadow: 0 0 8px rgba($danger, 0.5), 0 0 16px rgba($danger, 0.2); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 4px rgba($danger, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 8px rgba($danger, 0.5), 0 0 16px rgba($danger, 0.2);
+  }
 }
 
 .grid-inventory-container {
@@ -2581,8 +2781,13 @@ $inv-types: (
   aspect-ratio: 1;
   position: relative;
 
-  &::before { display: none; }
-  &::after { display: none; }
+  &::before {
+    display: none;
+  }
+
+  &::after {
+    display: none;
+  }
 }
 
 .grid-ghost-cell {
@@ -2651,7 +2856,9 @@ $inv-types: (
 }
 
 @keyframes busySpin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .grid-item--unsearched {
@@ -2701,7 +2908,9 @@ $inv-types: (
 }
 
 @keyframes searchSpin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .grid-item--revealing {
@@ -2713,6 +2922,7 @@ $inv-types: (
     opacity: 0;
     transform: scale(0.92);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
@@ -2779,12 +2989,29 @@ $inv-types: (
   }
 }
 
-.grid-item--rarity-common { @include rarity-tier($rarity-common); }
-.grid-item--rarity-uncommon { @include rarity-tier($rarity-uncommon); }
-.grid-item--rarity-rare { @include rarity-tier($rarity-rare); }
-.grid-item--rarity-epic { @include rarity-tier($rarity-epic); }
-.grid-item--rarity-legendary { @include rarity-tier($rarity-legendary); }
-.grid-item--rarity-mythic { @include rarity-tier($rarity-mythic); }
+.grid-item--rarity-common {
+  @include rarity-tier($rarity-common);
+}
+
+.grid-item--rarity-uncommon {
+  @include rarity-tier($rarity-uncommon);
+}
+
+.grid-item--rarity-rare {
+  @include rarity-tier($rarity-rare);
+}
+
+.grid-item--rarity-epic {
+  @include rarity-tier($rarity-epic);
+}
+
+.grid-item--rarity-legendary {
+  @include rarity-tier($rarity-legendary);
+}
+
+.grid-item--rarity-mythic {
+  @include rarity-tier($rarity-mythic);
+}
 
 .grid-item-image {
   position: absolute;
@@ -3139,6 +3366,7 @@ $inv-types: (
 
   -moz-appearance: textfield;
   appearance: textfield;
+
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -3184,9 +3412,19 @@ $inv-types: (
 }
 
 .grid-amount-selector--shop {
-  .grid-amount-label { color: rgba($type-shop, 0.5); }
-  .grid-amount-input { color: $type-shop; }
-  .grid-amount-btn:hover { color: $type-shop; border-color: rgba($type-shop, 0.2); }
+  .grid-amount-label {
+    color: rgba($type-shop, 0.5);
+  }
+
+  .grid-amount-input {
+    color: $type-shop;
+  }
+
+  .grid-amount-btn:hover {
+    color: $type-shop;
+    border-color: rgba($type-shop, 0.2);
+  }
+
   .grid-amount-quick--active {
     color: $type-shop;
     background: rgba($type-shop, 0.1);
@@ -3195,9 +3433,19 @@ $inv-types: (
 }
 
 .grid-amount-selector--craft {
-  .grid-amount-label { color: rgba($type-crafting, 0.5); }
-  .grid-amount-input { color: $type-crafting; }
-  .grid-amount-btn:hover { color: $type-crafting; border-color: rgba($type-crafting, 0.2); }
+  .grid-amount-label {
+    color: rgba($type-crafting, 0.5);
+  }
+
+  .grid-amount-input {
+    color: $type-crafting;
+  }
+
+  .grid-amount-btn:hover {
+    color: $type-crafting;
+    border-color: rgba($type-crafting, 0.2);
+  }
+
   .grid-amount-quick--active {
     color: $type-crafting;
     background: rgba($type-crafting, 0.1);
@@ -3243,23 +3491,49 @@ $inv-types: (
 }
 
 @keyframes craftingPulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
 }
 
 @keyframes craftingStripes {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 20px; }
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 20px;
+  }
 }
 
 @keyframes craftCellAppear {
-  0% { opacity: 0; transform: scale(0.85); }
-  100% { opacity: 1; transform: scale(1); }
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes craftDoneAppear {
-  0% { opacity: 0; transform: scale(0.92); }
-  100% { opacity: 1; transform: scale(1); }
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .crafting-inventory-wrapper {
@@ -3584,13 +3858,11 @@ $inv-types: (
 .craft-queue-cell-progress-bar {
   width: 100%;
   background:
-    repeating-linear-gradient(
-      -45deg,
+    repeating-linear-gradient(-45deg,
       rgba($type-crafting, 0.08),
       rgba($type-crafting, 0.08) 4px,
       rgba($type-crafting, 0.16) 4px,
-      rgba($type-crafting, 0.16) 8px
-    );
+      rgba($type-crafting, 0.16) 8px);
   background-size: 100% 20px;
   border-top: 1px solid rgba($type-crafting, 0.25);
   transition: height 0.1s linear;
